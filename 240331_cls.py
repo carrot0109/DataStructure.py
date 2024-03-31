@@ -171,8 +171,30 @@ class ArraySet:
         setC = ArraySet()
         
         for i in range(self.size):
-            
-                    
+            if setB.contains(self.array[i]):
+                setC.insert(self.array[i])
+        
+        return setC
+    
+    def differences(self, setB):
+        setC = ArraySet()
+
+        for i in range(self.size):
+            if not setB.contains(self.array[i]):
+                setC.insert(self.array[i])
+        
+        return setC 
+    
+    def __eq__(self,setB):
+        if self.size != setB.size:
+            return False
+        
+        for i in range(self.size):
+            if not setB.contains(self.array[i]):
+                return False
+        
+        return True
+
             
 if __name__ == '__main__':
     S = ArraySet()
@@ -191,6 +213,20 @@ if __name__ == '__main__':
     
     C = S.union(T)
     C.display()
+
+    I = S.intersection(T)
+    I.display()
+
+    D = S.differences(T)
+    D.display()
     
-    # 교집합, 차집합 연산
-    # print(S == T) : 연산자 중복
+    A = ArraySet()
+    A.insert(1)
+    A.insert(2)
+
+    B = ArraySet()
+    B.insert(2)
+    B.insert(3)
+
+    print(A == B)
+    
