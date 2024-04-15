@@ -1,45 +1,54 @@
 from ArrayStack import ArrayStack
-MAZE_SIZE = 6
 
-def isValidPos(x,y):
-    if 0 <= x < MAZE_SIZE and 0 <= y < MAZE_SIZE:       # is inner of maze? and can I go there?
-        if map[y][x] == '0' or map[y][x] == 'x':
+map = [
+    ['1', '1', '1', '1', '1', '1'],
+    ['e', '0', '0', '0', '0', '1'],
+    ['1', '0', '1', '0', '1', '1'],
+    ['1', '1', '1', '0', '0', 'x'],
+    ['1', '1', '1', '0', '1', '1'],
+    ['1', '1', '1', '1', '1', '1']
+]
+
+SIZE = 6
+
+def isValidPos(r, c):   # r : row, c : column
+    if  0 <= r < SIZE and 0 <= c < SIZE:
+        if map[r][c] == '0' or map[r][c] == 'x':
             return True
     return False
 
 def DFS():
     print('DFS : ')
-    stack = ArrayStack(100)
-    stack.push((0,1))       # start point
+    S = ArrayStack()
 
-    while not stack.isEmpty():
-        here = stack.pop()
-        print(here, end=' ->')
-        (x,y) = here
-
-        if(map[y][x] == 'x'):       # x --> end point
+    S.push((1, 0))
+    while not S.isEmpty():
+        pos = S.pop()
+        print(pos, end=' -> ')
+        (r, c) = pos
+        if map[r][c] == 'x':
             return True
+        
         else:
-            map[y][x] = '.'     # visited
-            if isValidPos(x, y - 1): stack.push((x, y - 1))   # up
-            if isValidPos(x, y + 1): stack.push((x, y + 1))   # down
-            if isValidPos(x - 1, y): stack.push((x - 1, y))   # left
-            if isValidPos(x + 1, y): stack.push((x + 1, y))   # right
-        print(' 현재 스택:', stack)
+            map[r][c] = '.'
+            if isValidPos(r - 1, c):
+                S.push((r - 1, c))
+            if isValidPos(r + 1, c):
+                S.push((r + 1, c))
+            if isValidPos(r, c - 1):
+                S.push((r, c - 1))
+            if isValidPos(r, c + 1):
+                S.push((r, c + 1))
+        
+        S.display()
 
-    return False        # Failure of search
+    return False
 
 
 if __name__ == '__main__':
-    map = [
-        ['1', '1', '1', '1', '1', '1'],
-        ['e', '0', '0', '0', '0', '1'],
-        ['1', '0', '1', '0', '1', '1'],
-        ['1', '1', '1', '0', '0', 'x'],
-        ['1', '1', '1', '0', '1', '1'],
-        ['1', '1', '1', '1', '1', '1']
-    ]
+    res = DFS()
 
-    result = DFS()
-    if result : print(' --> 미로 탐색 성공')
-    else : print(' --> 미로 탐색 실패')
+    if res:
+        print('SUCCESS')
+    else:
+        print('FAILURE')
