@@ -43,7 +43,7 @@ def insertionSort(L):
 
     
 if __name__ == "__main__":
-    data = [5, 3, 8, 4, 9, 1, 6, 2, 7]      # 4 자리에 5 를 대입한다면 안전성을 보장하지 못함
+    data = [5, 3, 8, 4, 9, 1, 6, 2, 7]    
     
     L = list(data)
 
