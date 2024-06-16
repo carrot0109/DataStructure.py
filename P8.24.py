@@ -13,7 +13,7 @@ def isMinHeapRec(A, i):
 
     # 오른쪽 자식이 없고, 왼쪽 자식만 있는 경우
     if right >= n:
-        # 현재 노드가 왼쪽 자식보다 작거나 같으면 최소 힙 조건을 만족함
+        # 현재 노드가 왼쪽 자식보다 작거나 같으면 최소 힙 조건을 만족함 
         return A[i] <= A[left] and isMinHeapRec(A, left)
 
     # 현재 노드가 왼쪽 및 오른쪽 자식보다 작거나 같아야 함
